@@ -75,6 +75,8 @@ function launchPubSub () {
       subEvents.emit('new', data.toString().trim())
     }
   })
+
+  return Promise.resolve()
 }
 
 /**
