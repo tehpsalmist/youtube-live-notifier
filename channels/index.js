@@ -52,9 +52,9 @@ function launchPubSub () {
     if (channels[id]) {
       channels[id].refreshStatus()
     } else {
-    channels[id] = new Channel(id)
+      channels[id] = new Channel(id)
 
-    channels[id].subscribe()
+      channels[id].subscribe()
     }
   })
 
@@ -134,7 +134,7 @@ const Channel = function Channel (id) {
     formdata.append('hub.lease_seconds', '')
 
     return fetch(`https://pubsubhubbub.appspot.com/subscribe`, { method: 'POST', body: formdata })
-      .then(res => pubsub.unsubscribe(getTopic(id), getHub()))
+      .then(res => new Promise((resolve, reject) => pubsub.unsubscribe(getTopic(id), getHub(), () => resolve())))
       .then(() => {
         this.events.removeAllListeners()
 
@@ -156,7 +156,7 @@ const Channel = function Channel (id) {
     formdata.append('hub.lease_seconds', '')
 
     return fetch(`https://pubsubhubbub.appspot.com/subscribe`, { method: 'POST', body: formdata })
-      .then(res => pubsub.subscribe(getTopic(id), getHub()))
+      .then(res => new Promise((resolve, reject) => pubsub.subscribe(getTopic(id), getHub(), () => resolve())))
   }
 
   this.refreshStatus = () => getLiveVideos(id).then(json => {
