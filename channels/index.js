@@ -49,9 +49,13 @@ function launchPubSub () {
   })
 
   subEvents.on('new', id => {
+    if (channels[id]) {
+      channels[id].refreshStatus()
+    } else {
     channels[id] = new Channel(id)
 
     channels[id].subscribe()
+    }
   })
 
   process.on('exit', () => {
