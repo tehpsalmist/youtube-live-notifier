@@ -4,13 +4,21 @@ module.exports = {
     node: true
   },
   'extends': [
-    'plugin:vue/strongly-recommended',
+    'plugin:vue/recommended',
     '@vue/standard',
     '@vue/typescript'
   ],
   rules: {
     'no-console': 'off',
-    'no-debugger': 'off'
+    'no-debugger': 'off',
+    'vue/max-attributes-per-line': {
+      multiline: {
+        allowFirstLine: true
+      }
+    },
+    'vue/multiline-html-element-content-newline': {
+      ignores: ['VueComponent', 'pre', 'textarea']
+    }
   },
   parserOptions: {
     parser: 'typescript-eslint-parser'
