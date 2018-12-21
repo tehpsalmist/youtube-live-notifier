@@ -4,18 +4,11 @@
       id="nav"
       class="relative"
     >
-      <RouterLink to="/">
-        Home
-      </RouterLink>&nbsp;|
-      <RouterLink to="/about">
-        About
-      </RouterLink>
       <Notifier
         channel="UCjnmL8ZJhsP7P8kGfblrMZA"
         class="absolute pin-t pin-r mr-4 mt-2 w-32"
       />
     </div>
-    <RouterView />
   </div>
 </template>
 
