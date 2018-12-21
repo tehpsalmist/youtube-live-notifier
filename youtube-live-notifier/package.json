@@ -1,12 +1,23 @@
 {
-  "name": "youtube-live-notifier",
+  "name": "@youtube-live-notifier/vue",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "build-component": "vue-cli-service build --target lib --name 'youtube-live-notifier' ./src/components/exporter.ts"
   },
+  "main": "./dist/youtube-live-notifier.common.js",
+  "files": [
+    "dist/*",
+    "src/*",
+    "public/*",
+    "*.json",
+    "*.js",
+    "*.vue",
+    "*.ts"
+  ],
   "dependencies": {
     "socket.io-client": "^2.2.0",
     "vue": "^2.5.17",
