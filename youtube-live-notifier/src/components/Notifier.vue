@@ -1,52 +1,89 @@
 <template>
   <div>
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      xmlns:xlink="http://www.w3.org/1999/xlink"
-      version="1.1"
-      id="YouTube_Icon"
-      x="30px"
-      y="22px"
-      viewBox="0 0 1024 721"
-      enable-background="new 0 0 1024 721"
-      xml:space="preserve"
-    >
-      <path id="Triangle" fill="#FFFFFF" d="M407,493l276-143L407,206V493z"></path>
-      <path
-        id="The_Sharpness"
-        opacity="0.12"
-        fill="#420000"
-        enable-background="new    "
-        d="M407,206l242,161.6l34-17.6L407,206z"
-      ></path>
-      <g id="Lozenge">
-        <g>
-          <linearGradient
-            id="SVGID_1_"
-            gradientUnits="userSpaceOnUse"
-            x1="512.5"
-            y1="719.7"
-            x2="512.5"
-            y2="1.2"
-            gradientTransform="matrix(1 0 0 -1 0 721)"
-          >
-            <stop offset="0" :style="{ 'stop-color': live ? lightColor : '#DDDDDD' }"></stop>
-            <stop offset="1" :style="{ 'stop-color': live ? darkColor : '#BBBBBB' }"></stop>
-          </linearGradient>
-          <path
-            fill="url(#SVGID_1_)"
-            d="M1013,156.3c0,0-10-70.4-40.6-101.4C933.6,14.2,890,14,870.1,11.6C727.1,1.3,512.7,1.3,512.7,1.3    h-0.4c0,0-214.4,0-357.4,10.3C135,14,91.4,14.2,52.6,54.9C22,85.9,12,156.3,12,156.3S1.8,238.9,1.8,321.6v77.5    C1.8,481.8,12,564.4,12,564.4s10,70.4,40.6,101.4c38.9,40.7,89.9,39.4,112.6,43.7c81.7,7.8,347.3,10.3,347.3,10.3    s214.6-0.3,357.6-10.7c20-2.4,63.5-2.6,102.3-43.3c30.6-31,40.6-101.4,40.6-101.4s10.2-82.7,10.2-165.3v-77.5    C1023.2,238.9,1013,156.3,1013,156.3z M407,493V206l276,144L407,493z"
-          ></path>
+    <div style="position: relative;">
+      <svg
+        id="YouTube_Icon"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        version="1.1"
+        x="30px"
+        y="22px"
+        viewBox="0 0 1024 721"
+        enable-background="new 0 0 1024 721"
+        xml:space="preserve"
+        :class="{pulse: live}"
+      >
+        <path
+          id="Triangle"
+          fill="#FFFFFF"
+          d="M407,493l276-143L407,206V493z"
+        ></path>
+        <path
+          id="The_Sharpness"
+          opacity="0.12"
+          fill="#420000"
+          enable-background="new    "
+          d="M407,206l242,161.6l34-17.6L407,206z"
+        ></path>
+        <g id="Lozenge">
+          <g>
+            <linearGradient
+              id="SVGID_1_"
+              gradientUnits="userSpaceOnUse"
+              x1="512.5"
+              y1="719.7"
+              x2="512.5"
+              y2="1.2"
+              gradientTransform="matrix(1 0 0 -1 0 721)"
+            >
+              <stop
+                offset="0"
+                :style="{ 'stop-color': live ? lightColor : '#DDDDDD' }"
+              ></stop>
+              <stop
+                offset="1"
+                :style="{ 'stop-color': live ? darkColor : '#BBBBBB' }"
+              ></stop>
+            </linearGradient>
+            <path
+              fill="url(#SVGID_1_)"
+              d="M1013,156.3c0,0-10-70.4-40.6-101.4C933.6,14.2,890,14,870.1,11.6C727.1,1.3,512.7,1.3,512.7,1.3    h-0.4c0,0-214.4,0-357.4,10.3C135,14,91.4,14.2,52.6,54.9C22,85.9,12,156.3,12,156.3S1.8,238.9,1.8,321.6v77.5    C1.8,481.8,12,564.4,12,564.4s10,70.4,40.6,101.4c38.9,40.7,89.9,39.4,112.6,43.7c81.7,7.8,347.3,10.3,347.3,10.3    s214.6-0.3,357.6-10.7c20-2.4,63.5-2.6,102.3-43.3c30.6-31,40.6-101.4,40.6-101.4s10.2-82.7,10.2-165.3v-77.5    C1023.2,238.9,1013,156.3,1013,156.3z M407,493V206l276,144L407,493z"
+            ></path>
+          </g>
         </g>
-      </g>
-      <text
-        x="30"
-        y="600"
-        textLength="100%"
-        lengthAdjust="spacing"
-        style="font: 100px sans-serif"
-      >We're Live!</text>
-    </svg>
+        <text
+          v-show="live"
+          x="0"
+          y="721"
+          dx="180"
+          dy="-100"
+          textLength="auto"
+          lengthAdjust="spacing"
+          style="font: bold 130px sans-serif; fill: #fff;"
+        >We're Live!</text>
+      </svg>
+      <svg
+        v-show="streamEnded"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        version="1.1"
+        x="30px"
+        y="22px"
+        viewBox="0 0 1024 120"
+        enable-background="new 0 0 1024 120"
+        xml:space="preserve"
+        class="stream-text"
+      >
+        <text
+          x="0"
+          y="120"
+          dx="75"
+          textLength="auto"
+          lengthAdjust="spacing"
+          style="font: bold 130px sans-serif; fill: #E52D27;"
+        >Stream Ended</text>
+      </svg>
+    </div>
   </div>
 </template>
 
@@ -55,10 +92,11 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 import io from 'socket.io-client'
 
 @Component
-export default class Notifier extends Vue {
+export default class YTLiveNotifier extends Vue {
   @Prop() private channel!: string
   @Prop() private color!: string
   private live: boolean = false
+  private streamEnded: boolean = false
   private liveFeeds: { [key: string]: string } = {}
   private darkColor: string
   private socket: any
@@ -99,7 +137,6 @@ export default class Notifier extends Vue {
       'channelRequest',
       this.channel,
       (data: { namespace: string; success: boolean }) => {
-        console.log(data)
         this.channelSocket = io(`http://localhost:7000${data.namespace}`)
 
         this.channelSocket.on(
@@ -107,11 +144,12 @@ export default class Notifier extends Vue {
           (data: { videoId: string; channelId: string }) => {
             if (this.live && !data.videoId) this.liveStreamFinished()
 
-            console.log(data)
             this.live = !!data.videoId
 
             if (data.videoId && !this.liveFeeds[data.videoId]) {
               this.liveFeeds[data.videoId] = data.videoId
+            } else if (!data.videoId) {
+              this.liveFeeds = {}
             }
           }
         )
@@ -119,7 +157,12 @@ export default class Notifier extends Vue {
     )
   }
 
-  liveStreamFinished() {}
+  liveStreamFinished() {
+    this.streamEnded = true
+    setTimeout(() => {
+      this.streamEnded = false
+    }, 3000)
+  }
 
   darken(color: string): string {
     const [hue, saturation, lightness] = color.startsWith('hsl')
@@ -204,3 +247,51 @@ export default class Notifier extends Vue {
   }
 }
 </script>
+
+<style>
+.stream-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transform: translateY(420%);
+  animation: fadeInOut 3s linear;
+}
+
+.pulse {
+  animation: pulse 1s linear infinite;
+}
+
+@keyframes pulse {
+  40% {
+    transform: scale(1, 1);
+  }
+  55% {
+    transform: scale(1.02, 1.02);
+  }
+  70% {
+    transform: scale(1, 1);
+  }
+  85% {
+    transform: scale(1.02, 1.02);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(420%);
+  }
+  15% {
+    opacity: 1;
+    transform: translateY(465%);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(720%);
+  }
+}
+</style>
