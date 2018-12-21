@@ -10,7 +10,7 @@ const { getLiveVideos, getVidDeets } = require('../videos')
 const { getUrl, getHub, getTopic } = require('../utilities')
 
 const port = process.env.HUB_PORT || 8000
-const {DEV} = process.env
+const { DEV } = process.env
 
 let pubsub
 
