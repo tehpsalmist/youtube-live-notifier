@@ -29,7 +29,6 @@ function requestChannel (id) {
     channels[id].refreshStatus()
 
     nspClient.on('disconnect', message => {
-      console.log('message', message)
       message === 'transport close' && channelNameSpace.clients((err, clients) => {
         if (err) throw err
 

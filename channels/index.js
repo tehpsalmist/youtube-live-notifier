@@ -10,6 +10,7 @@ const { getLiveVideos, getVidDeets } = require('../videos')
 const { getUrl, getHub, getTopic } = require('../utilities')
 
 const port = process.env.HUB_PORT || 8000
+const {DEV} = process.env
 
 let pubsub
 
@@ -21,18 +22,18 @@ function launchPubSub () {
   pubsub.on('feed', feedHandler)
 
   pubsub.on('denied', data => {
-    console.log('denied:', data)
+    DEV && console.log('denied:', data)
   })
 
   pubsub.on('error', data => {
-    console.log('error:', data)
+    DEV && console.log('error:', data)
   })
 
-  pubsub.on('subscribe', data => console.log('subscribed:', data.topic))
+  pubsub.on('subscribe', data => DEV && console.log('subscribed:', data.topic))
 
-  pubsub.on('unsubscribe', data => console.log('unsubscribed:', data.topic))
+  pubsub.on('unsubscribe', data => DEV && console.log('unsubscribed:', data.topic))
 
-  pubsub.on('listen', () => console.log('listening'))
+  pubsub.on('listen', () => DEV && console.log('listening'))
 
   pubsub.listen(port)
 
@@ -59,7 +60,7 @@ function launchPubSub () {
   })
 
   process.on('exit', () => {
-    console.log('safe to close')
+    DEV && console.log('safe to close')
   })
 
   process.once('SIGUSR2', () => {
@@ -138,7 +139,7 @@ const Channel = function Channel (id) {
       .then(() => {
         this.events.removeAllListeners()
 
-        console.log('unsubscribed', id)
+        DEV && console.log('unsubscribed', id)
 
         delete channels[id]
       })
@@ -198,7 +199,7 @@ function feedHandler (data) {
           ? channels[channel].events.emit('incoming', ['live', video])
           : channels[channel].events.emit('incoming', ['check', video])
       } else {
-        console.log('Bad Event?')
+        DEV && console.log('Bad Event?')
       }
     }) : channels[channelId] && channels[channelId].events.emit('incoming', ['check'])
   }
